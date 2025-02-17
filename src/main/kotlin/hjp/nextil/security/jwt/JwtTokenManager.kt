@@ -15,7 +15,7 @@ class JwtTokenManager(
     @Value("\${auth.jwt.issuer}") private var issuer: String,
     @Value("\${auth.jwt.secret}") private var secret: String,
 ) {
-    private val accessTokenValidity = 60 * 1000
+    private val accessTokenValidity = 60 * 1000 * 60
     private val key = Keys.hmacShaKeyFor(secret.toByteArray(StandardCharsets.UTF_8))
 
     private fun generateToken(subject: String, expirationTime: Int): String {
@@ -33,6 +33,12 @@ class JwtTokenManager(
             .claims(claims)
             .signWith(key)
             .compact()
+    }
+    fun generateTokenResponse(memberId: Long): String{
+        return generateToken(
+                subject = memberId.toString(),
+                expirationTime = accessTokenValidity
+            )
     }
 
     fun validateToken(token: String): Result<Jws<Claims>> {

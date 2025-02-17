@@ -29,12 +29,12 @@ class SecurityConfig(
             .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .authorizeHttpRequests {
                 it.requestMatchers(
-                    "/api/auth/**",
                     "/swagger-ui/**",
                     "/v3/api-docs/**",
                     "/swagger-resources/**",
                     "/swagger-ui.html",
                     "swagger-ui/index.html#",
+                    "/oauth/**"
                     ).permitAll()
                 it.anyRequest().authenticated()
             }
