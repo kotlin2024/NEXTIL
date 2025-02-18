@@ -1,5 +1,6 @@
 package hjp.nextil.security.config
 
+import hjp.nextil.domain.member.service.OAuth2Service
 import hjp.nextil.security.jwt.JwtAuthenticationFilter
 import hjp.nextil.security.jwt.JwtTokenManager
 import org.springframework.context.annotation.Bean
@@ -17,7 +18,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 class SecurityConfig(
-    private val jwtTokenManager: JwtTokenManager
+    private val jwtTokenManager: JwtTokenManager,
+    private val oAuth2Service: OAuth2Service
 ) {
 
     @Bean
@@ -26,7 +28,7 @@ class SecurityConfig(
 
         return http
             .csrf { it.disable() }
-            .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
+            .cors{}
             .authorizeHttpRequests {
                 it.requestMatchers(
                     "/swagger-ui/**",
@@ -34,9 +36,17 @@ class SecurityConfig(
                     "/swagger-resources/**",
                     "/swagger-ui.html",
                     "swagger-ui/index.html#",
-                    "/oauth/**"
+                    "/oauth/**",
+                    "/api/auth/**",
                     ).permitAll()
                 it.anyRequest().authenticated()
+            }
+            .oauth2Login {
+                it.loginPage("/login")
+                    .defaultSuccessUrl("/", true)
+                    .userInfoEndpoint { userInfo ->
+                        userInfo.userService(oAuth2Service)
+                    }
             }
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)
             .build()
