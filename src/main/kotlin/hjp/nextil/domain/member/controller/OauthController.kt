@@ -28,12 +28,6 @@ class OAuth2LoginController(
     @Value("\${spring.security.oauth2.client.provider.kakao.token-uri}") private val tokenUri: String,
     @Value("\${spring.security.oauth2.client.provider.kakao.user-info-uri}") private val userInfoUri: String
 ) {
-//    private val clientId = "a72d70d83225414c8f86b9e83fe14054"
-//    private val clientSecret = "kQIpCOQuCmYrple9YZDYYpi8mn6ixP0E"
-//    private val redirectUri = "http://localhost:8080/api/auth/kakao/callback"
-//    private val tokenUri = "https://kauth.kakao.com/oauth/token"
-//    private val userInfoUri = "https://kapi.kakao.com/v2/user/me"
-
 
     @GetMapping("/kakao/login")
     fun kakaoLogin(): String {

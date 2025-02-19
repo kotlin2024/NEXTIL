@@ -45,6 +45,12 @@ dependencies {
     // oauth2
     implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
 
+    // jsoup
+    implementation("org.jsoup:jsoup:1.15.3")
+
+    // open ai
+    implementation("com.aallam.openai:openai-client:3.6.4")
+
 }
 
 dependencyManagement {
