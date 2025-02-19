@@ -28,7 +28,7 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     //implementation("org.springframework.ai:spring-ai-openai-spring-boot-starter")
-    runtimeOnly("org.postgresql:postgresql")
+    implementation("mysql:mysql-connector-java:8.0.33")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testImplementation("org.springframework.security:spring-security-test")
@@ -41,6 +41,15 @@ dependencies {
 
     // SWAGGER
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
+
+    // oauth2
+    implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
+
+    // jsoup
+    implementation("org.jsoup:jsoup:1.15.3")
+
+    // open ai
+    implementation("com.aallam.openai:openai-client:3.6.4")
 
 }
 

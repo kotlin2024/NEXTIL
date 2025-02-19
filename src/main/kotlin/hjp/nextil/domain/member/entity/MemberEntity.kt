@@ -13,8 +13,10 @@ class MemberEntity(
     @Column(name = "user_name")
     val userName:String,
 
-    @Column(name = "created_at")
-    val createdAt: LocalDateTime,
+    @Column(name= "password")
+    val password:String?,
 
+    @Column(name = "created_at")
+    val createdAt: LocalDateTime = LocalDateTime.now(),
 
 )
