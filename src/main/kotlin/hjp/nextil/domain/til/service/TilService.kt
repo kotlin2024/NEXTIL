@@ -1,13 +1,15 @@
 package hjp.nextil.domain.til.service
 
+import hjp.nextil.domain.ai.OpenAIService
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.springframework.stereotype.Service
 
 
 @Service
-class TilService {
-
+class TilService(
+    private val openAIService: OpenAIService,
+) {
 
     fun getBodyText(url: String): String{
 
