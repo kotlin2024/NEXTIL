@@ -9,9 +9,8 @@ class TilEntity(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? =null,
 
-    @ManyToOne
-    @JoinColumn(name = "member_id", nullable = false)
-    val memberId: MemberEntity,
+    @Column(name = "member_id")
+    val memberId: Long,
 
     @ElementCollection
     @CollectionTable(name = "til_keywords", joinColumns = [JoinColumn(name = "til_id")])

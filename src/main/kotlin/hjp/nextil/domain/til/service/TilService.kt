@@ -17,7 +17,6 @@ class TilService(
 
     }
 
-
     fun fetchHtmlFromUrl(url: String): Document {
 
         val cleanUrl = url.replace("\"", "").replace("'", "").trim()
@@ -29,6 +28,16 @@ class TilService(
 
 
     fun extractMainContent(document: Document): String {
+        val content = document.select("div.contents_style").text()
+
+        // 제목 추출
+        val title = document.select(("div.info_text strong.title_post")).text()
+
+        // 본문과 제목을 함께 반환 (필요에 따라 조합 방식 조정 가능)
+        return "Title: $title\nContent: $content"
+    }
+
+    fun extractAllContent(document: Document): String {
         return document.select("body").text() // 기본적으로 본문 전체 텍스트 가져오기
     }
 

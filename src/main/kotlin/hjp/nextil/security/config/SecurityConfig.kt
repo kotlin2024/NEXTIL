@@ -16,6 +16,9 @@ import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.provisioning.InMemoryUserDetailsManager
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
+import org.springframework.web.cors.CorsConfiguration
+import org.springframework.web.cors.CorsConfigurationSource
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 
 @Configuration
 class SecurityConfig(
@@ -37,18 +40,27 @@ class SecurityConfig(
                     "swagger-ui/index.html#",
                     "/oauth/**",
                     "/api/auth/**",
+                    //"/api/openai/**"
                     ).permitAll()
                 it.anyRequest().authenticated()
             }
-//            .oauth2Login {
-//                it.loginPage("/login")
-//                    .defaultSuccessUrl("/", true)
-//                    .userInfoEndpoint { userInfo ->
-//                        userInfo.userService(oAuth2Service)
-//                    }
-//            }
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)
             .build()
     }
+
+
+//    @Bean
+//    fun corsConfigurationSource(): CorsConfigurationSource {
+//        val configuration = CorsConfiguration()
+//        configuration.allowedOrigins = listOf("https://api.openai.com") // 허용할 클라이언트 URL
+//        configuration.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS") // 허용할 HTTP 메서드
+//        configuration.allowedHeaders = listOf("*") // 모든 헤더를 허용
+//        configuration.exposedHeaders = listOf("Authorization") // Authorization 헤더 노출
+//        configuration.allowCredentials = true // 쿠키 허용
+//
+//        val source = UrlBasedCorsConfigurationSource()
+//        source.registerCorsConfiguration("/**", configuration)
+//        return source
+//    }
 
 }

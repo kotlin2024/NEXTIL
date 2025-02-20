@@ -1,9 +1,10 @@
 package hjp.nextil.domain.ai
 
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import hjp.nextil.security.jwt.UserPrincipal
+import org.springframework.http.ResponseEntity
+import org.springframework.security.core.annotation.AuthenticationPrincipal
+import org.springframework.web.bind.annotation.*
+
 
 @RestController
 @RequestMapping("/api/openai")
@@ -11,8 +12,11 @@ class OpenAIController(
     private val openAIService: OpenAIService,
 ) {
 
-    @GetMapping("/extract")
-    suspend fun extract(@RequestParam text: String): List<String> {
-        return openAIService.extractKeywordsFromText(text = text)
+    @PostMapping("/extract")
+    fun extract(@RequestBody text: UserText, @AuthenticationPrincipal user: UserPrincipal): ResponseEntity<List<String>> {
+        return ResponseEntity.ok().body(openAIService.extractKeywordsFromText(text = text.tilText, user= user))
     }
+
+
+
 }
