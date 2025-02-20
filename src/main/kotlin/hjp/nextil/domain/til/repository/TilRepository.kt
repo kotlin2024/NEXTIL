@@ -6,4 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository
 interface TilRepository: JpaRepository<TilEntity,Long> {
 
     fun  findByMemberId(memberId: Long): List<TilEntity>?
+
+    fun deleteAllByMemberId(memberId: Long)
 }

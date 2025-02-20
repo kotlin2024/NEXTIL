@@ -39,8 +39,9 @@ class OpenAIService(
             tilRepository.save(newTilEntity)
             newKeywords.toMutableList()
         } else {
-            existingTilEntity.tilKeyword.toMutableList()
+            existingTilEntity.flatMap { it.tilKeyword }.toMutableList()
         }
+        tilRepository.deleteAllByMemberId(user.memberId)
 
 
         val updatedKeywords = (myKeywords + newKeywords).toSet().toList()
