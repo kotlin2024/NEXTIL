@@ -1,4 +1,5 @@
-# NEXTIL
+# NEXTIL (Open AI를 이용한 TIL 추천서비스)
+<img src="https://raw.githubusercontent.com/kotlin2024/NEXTIL/master/DALL%C2%B7E%202025-02-17%2015.02.37%20-%20A%20modern%20and%20sleek%20logo%20for%20'NEXTIL'.%20The%20logo%20should%20feature%20a%20futuristic%20and%20minimalistic%20design%2C%20incorporating%20elements%20that%20symbolize%20technology%2C%20.webp" alt="프로젝트 로고" width="200"/>
 
 NEXTIL은 사용자가 TIL(오늘 배운 것)을 작성하고 관리하는 웹 애플리케이션 API입니다. 사용자가 작성하지 않은 TIL 주제를 추천하는 시스템을 제공합니다. 이 프로젝트는 Open AI를 이용하여 사용자가 작성한 TIL의 URL의 키워드를 추출하고 , 해당 분야에 맞는 키워드를 기반으로 TIL 주제를 추천하는 기능을 제공합니다.
 
