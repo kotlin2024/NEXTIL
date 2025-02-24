@@ -14,7 +14,7 @@ class TilController(
     private val openAIService: OpenAIService,
 ) {
 
-    @PostMapping("/openai")
+    @PostMapping("/openai/save")
     fun extractKeyWordFromOpenAi(
         @RequestBody url: String,
         @AuthenticationPrincipal user: UserPrincipal
@@ -24,18 +24,27 @@ class TilController(
         return ResponseEntity.ok().body(openAIService.extractKeywordsFromText(text = tilFullText, user = user))
     }
 
-    @PostMapping("/imsi")
-    fun imsi(@RequestBody url: String): String{
-
-        return tilService.getBodyText(url = url)
-    }
-
-    @GetMapping("/imsi_chek_my_Id")
-    fun imsiWhoAmI(
+    @GetMapping("/openai/recommend")
+    fun recommendTilSubjects(
         @AuthenticationPrincipal user: UserPrincipal,
-    ): String{
-        return "내 memberid = ${user.memberId}"
+    ): ResponseEntity<String>{
+
+        return ResponseEntity.ok().body(openAIService.recommendTilSubjects(user))
     }
+
+
+//    @PostMapping("/imsi")
+//    fun imsi(@RequestBody url: String): String{
+//
+//        return tilService.getBodyText(url = url)
+//    }
+
+//    @GetMapping("/imsi_chek_my_Id")
+//    fun imsiWhoAmI(
+//        @AuthenticationPrincipal user: UserPrincipal,
+//    ): String{
+//        return "내 memberid = ${user.memberId}"
+//    }
 
 
 
