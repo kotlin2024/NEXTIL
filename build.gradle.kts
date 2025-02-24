@@ -4,6 +4,7 @@ plugins {
     id("org.springframework.boot") version "3.4.2"
     id("io.spring.dependency-management") version "1.1.7"
     kotlin("plugin.jpa") version "1.9.25"
+    kotlin("plugin.serialization") version "1.9.25"
 }
 
 group = "HJP"
@@ -19,7 +20,6 @@ repositories {
     mavenCentral()
 }
 
-extra["springAiVersion"] = "1.0.0-M5"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
@@ -48,16 +48,18 @@ dependencies {
     // jsoup
     implementation("org.jsoup:jsoup:1.15.3")
 
-    // open ai
-    implementation("com.aallam.openai:openai-client:3.6.4")
+
+    // 코루틴
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3") // 코루틴 기본 라이브러리
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.7.3")
+
+    // ✅ Spring AI OpenAI Starter (OpenAI API 사용)
+    implementation("org.springframework.ai:spring-ai-openai-spring-boot-starter:1.0.0-M6")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
 
 }
 
-dependencyManagement {
-    imports {
-        mavenBom("org.springframework.ai:spring-ai-bom:${property("springAiVersion")}")
-    }
-}
 
 kotlin {
     compilerOptions {
